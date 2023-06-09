@@ -29,6 +29,8 @@
 
 */
 
+$result = array();
+
 $array_1 = array(
     'Материал' => 'Кожа',
     'Вид' => 'Матрас',
@@ -48,5 +50,30 @@ $array_2 = array(
     'Ножка' => 'Дерево',
     'Размер' => '200*420'
 );
+
+$result = combine_arrays_func($array_1, $result);
+$result = combine_arrays_func($array_2, $result);
+
+function combine_arrays_func($array_in, $results){
+
+    foreach ($array_in as $key=>$value) {
+        if (strlen($value)) {
+            if (!isset($results[$key])) {
+                $results[$key] = $value;
+            } else {
+                $results[$key] = array(
+                    '0' => $results[$key],
+                    '1' => $value
+                );
+            }
+        }
+    }
+
+    return $results;
+}
+
+echo "<pre>";
+var_dump($result);
+echo "</pre>";
 
 ?>
